@@ -13,7 +13,7 @@ jobs:
         image: postgres:13.10
         env:
           POSTGRES_USER: django_user
-          POSTGRES_PASSWORD: test_password # <--- Заменено на тестовый пароль
+          POSTGRES_PASSWORD: test_password
           POSTGRES_DB: django_db
         ports:
           - 5432:5432
@@ -30,7 +30,6 @@ jobs:
           python -m pip install --upgrade pip setuptools
           pip install flake8==7.3.0 flake8-isort==7.0.0
           pip install -r ./backend/requirements.txt
-
       - name: Test with flake8 and django tests
         env:
           POSTGRES_USER: django_user
@@ -42,7 +41,6 @@ jobs:
           python -m flake8 backend/
           cd backend/
           python manage.py test
-
   # ВНИМАНИЕ НА ОТСТУПЫ: 2 пробела (на одном уровне с tests)
   build_and_push_to_docker_hub:
     runs-on: ubuntu-latest
@@ -85,7 +83,6 @@ jobs:
         run: |
           cd frontend/
           npm ci
-
       - name: Test frontend
         # Запускаем тесты
         run: |
